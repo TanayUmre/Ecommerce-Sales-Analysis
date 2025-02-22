@@ -21,3 +21,5 @@ print(f"Total Sales are : {totalsale:.4f}")
 print(f"Total Profit is : {totalprofit:.4f}")
 print(f"Totals Orders Placed are : {totalorder}")
 print(f"Total Customers Using Ecommerce platform are : {totalcustomer}")
+
+# This code is used to show the total sales, total profit, total orders and total customers using ecommerce platform
