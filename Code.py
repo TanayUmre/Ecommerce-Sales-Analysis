@@ -23,3 +23,24 @@ print(f"Totals Orders Placed are : {totalorder}")
 print(f"Total Customers Using Ecommerce platform are : {totalcustomer}")
 
 # This code is used to show the total sales, total profit, total orders and total customers using ecommerce platform
+
+df["Year-Month"]=df["Order Date"].dt.to_period("M") 
+# This will show the monthy trend of the sales 
+
+ms=df.groupby("Year-Month")["Sales"].sum()
+# This will show the monthly sales of the ecommerce platform
+
+prolar=df.groupby("Product Name")["Sales"].sum().nlargest(10)
+# This will show the top 10 products with highest sales
+
+prosma=df.groupby("Product Name")["Sales"].sum().nsmallest(10)
+# This will show the top 10 products with lowest sales
+
+custop=df.groupby("Customer ID")["Sales"].sum().nlargest(10)
+# This will show the top 10 customers with highest sales
+
+cuslow=df.groupby("Customer ID")["Sales"].sum().nsmallest(10)
+# This will show the top 10 customers with lowest sales
+
+saleregion=df.groupby("Region")["Sales"].sum()
+# This will show the sales done by regions
