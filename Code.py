@@ -96,3 +96,23 @@ plt.xlabel("Customer ID")
 plt.xticks(rotation=90,ha="right")
 plt.show()
 # This will show the top 10 customers with lowest orders placed
+
+ctsa=df.groupby("Category")["Sales"].sum().sort_values(ascending=False)
+plt.figure(figsize=(10,5))
+ctsa.plot(kind='bar',color='magenta')
+plt.title("Sales by Product Category")
+plt.ylabel("Total Sales")
+plt.xlabel("Category")
+plt.xticks(rotation=90,ha="right")
+plt.show()
+# This will show the sales by product category
+
+ctpro=df.groupby("Category")["Profit"].sum().sort_values(ascending=False)
+plt.figure(figsize=(10,5))
+ctpro.plot(kind='bar',color='orange')
+plt.title("Profit by Product Category")
+plt.ylabel("Total Profit")
+plt.xlabel("Category")
+plt.xticks(rotation=90,ha="right")
+plt.show()
+# This will show the sales by product category
