@@ -30,17 +30,69 @@ df["Year-Month"]=df["Order Date"].dt.to_period("M")
 ms=df.groupby("Year-Month")["Sales"].sum()
 # This will show the monthly sales of the ecommerce platform
 
-prolar=df.groupby("Product Name")["Sales"].sum().nlargest(10)
+prolar=df.groupby("Product Name")["Sales"].sum().nlargest(10).reset_index()
 # This will show the top 10 products with highest sales
 
-prosma=df.groupby("Product Name")["Sales"].sum().nsmallest(10)
+prosma=df.groupby("Product Name")["Sales"].sum().nsmallest(10).reset_index()
 # This will show the top 10 products with lowest sales
 
-custop=df.groupby("Customer ID")["Sales"].sum().nlargest(10)
-# This will show the top 10 customers with highest sales
+custop=df.groupby("Customer ID")["Sales"].sum().nlargest(10).reset_index()
+# This will show the top 10 customers with most orders
 
-cuslow=df.groupby("Customer ID")["Sales"].sum().nsmallest(10)
-# This will show the top 10 customers with lowest sales
+cuslow=df.groupby("Customer ID")["Sales"].sum().nsmallest(10).reset_index()
+# This will show the top 10 customers with least orders
 
 saleregion=df.groupby("Region")["Sales"].sum()
 # This will show the sales done by regions
+
+plt.figure(figsize=(12,6))
+plt.plot(ms.index.astype(str),ms.values,marker='o',linestyle='-')
+plt.xticks(rotation=45)
+plt.title("Monthly Sales Trend of Ecommerce Platform")
+plt.xlabel("Month")
+plt.ylabel("Total Sales in the Month")
+plt.grid()
+plt.show()
+# This will show the monthly sales trend of the ecommerce platform
+
+plt.figure(figsize=(10,5))
+plt.bar(prolar['Product Name'],prolar["Sales"],color='skyblue')
+plt.title("Top 10 best selling products")
+plt.ylabel("Total Sales")
+plt.xlabel("Product Name")
+plt.xticks(rotation=90)
+plt.show()
+# This will show the top 10 best selling products
+
+plt.figure(figsize=(10,5))
+plt.bar(prosma['Product Name'],prolar["Sales"],color='skyblue')
+plt.title("Top 10 least selling products")
+plt.ylabel("Total Sales")
+plt.xlabel("Product Name")
+plt.xticks(rotation=90)
+plt.show()
+# This will show the top 10 least selling products
+
+saleregion.plot(kind='pie',autopct='%1.1f%%',figsize=(8,8),colormap='viridis')
+plt.title("Sales distribution by Region")
+plt.ylabel("")
+plt.show()
+# This will show the sales distribution by region
+
+plt.figure(figsize=(10,5))
+plt.bar(custop["Customer ID"].astype(str),custop["Sales"],color='red')
+plt.title("Top 10 customers with most orders")
+plt.ylabel("Total Orders")
+plt.xlabel("Customer ID")
+plt.xticks(rotation=90,ha="right")
+plt.show()
+# This will show the top 10 customers with most orders placed
+
+plt.figure(figsize=(10,5))
+plt.bar(cuslow["Customer ID"].astype(str),cuslow["Sales"],color='indigo')
+plt.title("Top 10 customers with lowest orders")
+plt.ylabel("Total Orders")
+plt.xlabel("Customer ID")
+plt.xticks(rotation=90,ha="right")
+plt.show()
+# This will show the top 10 customers with lowest orders placed
