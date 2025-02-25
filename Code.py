@@ -60,7 +60,7 @@ plt.bar(prolar['Product Name'],prolar["Sales"],color='skyblue')
 plt.title("Top 10 best selling products")
 plt.ylabel("Total Sales")
 plt.xlabel("Product Name")
-plt.xticks(rotation=90)
+plt.xticks(rotation=45,ha="right",fontsize=6)
 plt.show()
 # This will show the top 10 best selling products
 
@@ -69,7 +69,7 @@ plt.bar(prosma['Product Name'],prolar["Sales"],color='skyblue')
 plt.title("Top 10 least selling products")
 plt.ylabel("Total Sales")
 plt.xlabel("Product Name")
-plt.xticks(rotation=90)
+plt.xticks(rotation=45,ha="right",fontsize=6)
 plt.show()
 # This will show the top 10 least selling products
 
@@ -79,7 +79,7 @@ plt.ylabel("")
 plt.show()
 # This will show the sales distribution by region
 
-plt.figure(figsize=(10,5))
+plt.figure(figsize=(10,10))
 plt.bar(custop["Customer ID"].astype(str),custop["Sales"],color='red')
 plt.title("Top 10 customers with most orders")
 plt.ylabel("Total Orders")
@@ -88,7 +88,7 @@ plt.xticks(rotation=90,ha="right")
 plt.show()
 # This will show the top 10 customers with most orders placed
 
-plt.figure(figsize=(10,5))
+plt.figure(figsize=(10,10))
 plt.bar(cuslow["Customer ID"].astype(str),cuslow["Sales"],color='indigo')
 plt.title("Top 10 customers with lowest orders")
 plt.ylabel("Total Orders")
@@ -103,7 +103,7 @@ ctsa.plot(kind='bar',color='magenta')
 plt.title("Sales by Product Category")
 plt.ylabel("Total Sales")
 plt.xlabel("Category")
-plt.xticks(rotation=90,ha="right")
+plt.xticks(rotation=0,ha="right")
 plt.show()
 # This will show the sales by product category
 
@@ -113,6 +113,14 @@ ctpro.plot(kind='bar',color='orange')
 plt.title("Profit by Product Category")
 plt.ylabel("Total Profit")
 plt.xlabel("Category")
-plt.xticks(rotation=90,ha="right")
+plt.xticks(rotation=0,ha="right")
 plt.show()
 # This will show the sales by product category
+
+days=df["Order Date"].dt.day_name().value_counts()
+plt.figure(figsize=(8,8))
+days.plot(kind='pie',autopct='%1.1f%%')
+plt.title('Orders Distribution by the Day of the Week')
+plt.ylabel("")
+plt.show()
+# This will show on daywise share of orders placed
