@@ -124,3 +124,13 @@ plt.title('Orders Distribution by the Day of the Week')
 plt.ylabel("")
 plt.show()
 # This will show on daywise share of orders placed
+
+custord=df["Customer ID"].value_counts()
+plt.figure(figsize=(10,5))
+plt.hist(custord.values,bins=30,color="blue",edgecolor="black")
+plt.title("Customer Purchase Frequency Distribution")
+plt.xlabel("Number of Orders")
+plt.ylabel("Number of Customers")
+plt.grid()
+plt.show()
+# This will show the distribution of customer purchase frequency
