@@ -36,10 +36,10 @@ prolar=df.groupby("Product Name")["Sales"].sum().nlargest(10).reset_index()
 prosma=df.groupby("Product Name")["Sales"].sum().nsmallest(10).reset_index()
 # This will show the top 10 products with lowest sales
 
-custop=df.groupby("Customer ID")["Sales"].sum().nlargest(10).reset_index()
+custop=df.groupby("Customer Name")["Sales"].sum().nlargest(10).reset_index()
 # This will show the top 10 customers with most orders
 
-cuslow=df.groupby("Customer ID")["Sales"].sum().nsmallest(10).reset_index()
+cuslow=df.groupby("Customer Name")["Sales"].sum().nsmallest(10).reset_index()
 # This will show the top 10 customers with least orders
 
 saleregion=df.groupby("Region")["Sales"].sum()
@@ -79,21 +79,21 @@ plt.ylabel("")
 plt.show()
 # This will show the sales distribution by region
 
-plt.figure(figsize=(10,10))
-plt.bar(custop["Customer ID"].astype(str),custop["Sales"],color='red')
+plt.figure(figsize=(10,5))
+plt.bar(custop["Customer Name"].astype(str),custop["Sales"],color='red')
 plt.title("Top 10 customers with most orders")
 plt.ylabel("Total Orders")
-plt.xlabel("Customer ID")
-plt.xticks(rotation=90,ha="right")
+plt.xlabel("Customer Name")
+plt.xticks(rotation=70,ha="right")
 plt.show()
 # This will show the top 10 customers with most orders placed
 
-plt.figure(figsize=(10,10))
-plt.bar(cuslow["Customer ID"].astype(str),cuslow["Sales"],color='indigo')
+plt.figure(figsize=(10,5))
+plt.bar(cuslow["Customer Name"].astype(str),cuslow["Sales"],color='indigo')
 plt.title("Top 10 customers with lowest orders")
 plt.ylabel("Total Orders")
-plt.xlabel("Customer ID")
-plt.xticks(rotation=90,ha="right")
+plt.xlabel("Customer Name")
+plt.xticks(rotation=70,ha="right")
 plt.show()
 # This will show the top 10 customers with lowest orders placed
 
@@ -134,3 +134,23 @@ plt.ylabel("Number of Customers")
 plt.grid()
 plt.show()
 # This will show the distribution of customer purchase frequency
+
+state=df["State"].value_counts()
+ts=state.nlargest(5)
+ls=state.nsmallest(5)
+
+plt.figure(figsize=(10,5))
+plt.bar(ts.index,ts.values,color="green")
+plt.title("Top 5 States with Most Orders Placed")
+plt.xlabel("States")
+plt.ylabel("Number of Orders")
+plt.xticks(rotation=45)
+plt.show()
+
+plt.figure(figsize=(10,5))
+plt.bar(ls.index,ls.values,color="blue")
+plt.title("Top 5 States with Least Orders Placed")
+plt.xlabel("States")
+plt.ylabel("Number of Orders")
+plt.xticks(rotation=45)
+plt.show()
