@@ -24,27 +24,8 @@ print(f"Total Customers Using Ecommerce platform are : {totalcustomer}")
 
 # This code is used to show the total sales, total profit, total orders and total customers using ecommerce platform
 
-df["Year-Month"]=df["Order Date"].dt.to_period("M") 
-# This will show the monthy trend of the sales 
-
+df["Year-Month"]=df["Order Date"].dt.to_period("M")   # This will show the monthy trend of the sales 
 ms=df.groupby("Year-Month")["Sales"].sum()
-# This will show the monthly sales of the ecommerce platform
-
-prolar=df.groupby("Product Name")["Sales"].sum().nlargest(10).reset_index()
-# This will show the top 10 products with highest sales
-
-prosma=df.groupby("Product Name")["Sales"].sum().nsmallest(10).reset_index()
-# This will show the top 10 products with lowest sales
-
-custop=df.groupby("Customer Name")["Sales"].sum().nlargest(10).reset_index()
-# This will show the top 10 customers with most orders
-
-cuslow=df.groupby("Customer Name")["Sales"].sum().nsmallest(10).reset_index()
-# This will show the top 10 customers with least orders
-
-saleregion=df.groupby("Region")["Sales"].sum()
-# This will show the sales done by regions
-
 plt.figure(figsize=(12,6))
 plt.plot(ms.index.astype(str),ms.values,marker='o',linestyle='-')
 plt.xticks(rotation=45)
@@ -55,6 +36,7 @@ plt.grid()
 plt.show()
 # This will show the monthly sales trend of the ecommerce platform
 
+prolar=df.groupby("Product Name")["Sales"].sum().nlargest(10).reset_index()  # This will show the top 10 products with highest sales
 plt.figure(figsize=(10,5))
 plt.bar(prolar['Product Name'],prolar["Sales"],color='skyblue')
 plt.title("Top 10 best selling products")
@@ -64,8 +46,9 @@ plt.xticks(rotation=45,ha="right",fontsize=6)
 plt.show()
 # This will show the top 10 best selling products
 
+prosma=df.groupby("Product Name")["Sales"].sum().nsmallest(10).reset_index()  # This will show the top 10 products with lowest sales
 plt.figure(figsize=(10,5))
-plt.bar(prosma['Product Name'],prolar["Sales"],color='skyblue')
+plt.bar(prosma['Product Name'],prosma["Sales"],color='skyblue')
 plt.title("Top 10 least selling products")
 plt.ylabel("Total Sales")
 plt.xlabel("Product Name")
@@ -73,12 +56,15 @@ plt.xticks(rotation=45,ha="right",fontsize=6)
 plt.show()
 # This will show the top 10 least selling products
 
+saleregion=df.groupby("Region")["Sales"].sum()   # This will show the sales done by regions
+custop=df.groupby("Customer Name")["Sales"].sum().nlargest(10).reset_index()  # This will show the top 10 customers with most orders
 saleregion.plot(kind='pie',autopct='%1.1f%%',figsize=(8,8),colormap='viridis')
 plt.title("Sales distribution by Region")
 plt.ylabel("")
 plt.show()
 # This will show the sales distribution by region
 
+cuslow=df.groupby("Customer Name")["Sales"].sum().nsmallest(10).reset_index()   # This will show the top 10 customers with least orders
 plt.figure(figsize=(10,5))
 plt.bar(custop["Customer Name"].astype(str),custop["Sales"],color='red')
 plt.title("Top 10 customers with most orders")
