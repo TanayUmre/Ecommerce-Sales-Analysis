@@ -132,6 +132,7 @@ plt.xlabel("States")
 plt.ylabel("Number of Orders")
 plt.xticks(rotation=45)
 plt.show()
+# This will show the top 5 states with most orders placed
 
 plt.figure(figsize=(10,5))
 plt.bar(ls.index,ls.values,color="blue")
@@ -140,6 +141,7 @@ plt.xlabel("States")
 plt.ylabel("Number of Orders")
 plt.xticks(rotation=45)
 plt.show()
+# This will show the top 5 states with least orders placed
 
 shipmode=df["Ship Mode"].value_counts()
 plt.figure(figsize=(8,8))
@@ -147,3 +149,12 @@ plt.pie(shipmode,labels=shipmode.index,autopct="%1.1f%%",startangle=140)
 plt.title("Order Distribution by Ship Mode")
 plt.ylabel("")
 plt.show()
+# This will the distrution of various shipmodes
+
+year=df["Year"].value_counts()
+plt.figure(figsize=(8,8))
+plt.pie(year,labels=year.index,autopct="%1.1f%%",startangle=0)
+plt.title("Year-wise Order Distribution")
+plt.ylabel("")
+plt.show()
+# This will show the year-wise distribution of orders placed
