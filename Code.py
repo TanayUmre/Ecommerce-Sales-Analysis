@@ -179,3 +179,14 @@ plt.legend(title="Year")
 plt.grid(axis="y",linestyle="--",alpha=0.7)
 plt.show()
 # This will show the profit done in top 5 states with most profit over 4 years
+
+lsp=yearwiseprofit.sum(axis=1).nsmallest(5).index
+lssp=yearwiseprofit.loc[lsp]
+lssp.plot(kind="bar",colormap="viridis",edgecolor="black")
+plt.title("Top 5 States with Least Profit Over the Years",fontsize=14)
+plt.xlabel("States",fontsize=12)
+plt.ylabel("Profit",fontsize=12)
+plt.xticks(rotation=45)
+plt.legend(title="Year")
+plt.grid(axis="y",linestyle="--",alpha=0.7)
+plt.show()
