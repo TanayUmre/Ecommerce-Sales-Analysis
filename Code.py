@@ -104,7 +104,7 @@ plt.show()
 # This will show the sales by product category
 
 days=df["Order Date"].dt.day_name().value_counts()
-plt.figure(figsize=(8,8))
+plt.figure(figsize=(7,7))
 days.plot(kind='pie',autopct='%1.1f%%')
 plt.title('Orders Distribution by the Day of the Week')
 plt.ylabel("")
@@ -144,7 +144,7 @@ plt.show()
 # This will show the top 5 states with least orders placed
 
 shipmode=df["Ship Mode"].value_counts()
-plt.figure(figsize=(8,8))
+plt.figure(figsize=(7,7))
 plt.pie(shipmode,labels=shipmode.index,autopct="%1.1f%%",startangle=140)
 plt.title("Order Distribution by Ship Mode")
 plt.ylabel("")
@@ -152,19 +152,30 @@ plt.show()
 # This will the distrution of various shipmodes
 
 year=df["Year"].value_counts()
-plt.figure(figsize=(8,8))
+plt.figure(figsize=(7,7))
 plt.pie(year,labels=year.index,autopct="%1.1f%%",startangle=0)
 plt.title("Year-wise Order Distribution")
 plt.ylabel("")
 plt.show()
-# This will show the year-wise distribution of orders placed
+# This will show the year-wise distribution of orders 
 
-stateprofit=df.groupby("State")["Profit"].sum().sort_values(ascending=False)
-hs=stateprofit.nlargest(5)
-plt.figure(figsize=(10,5))
-plt.bar(hs.index,hs.values,color="yellow")
-plt.title("Top 5 States with Highest Profit")
-plt.xlabel("States")
-plt.ylabel("Profit")
-plt.xticks(rotation=45)
+yp=df.groupby("Year")["Profit"].sum()
+plt.figure(figsize=(7,7))
+plt.pie(yp,labels=yp.index,autopct="%1.1f%%",startangle=0)
+plt.title("Yearly Profit Distribution")
+plt.ylabel("")
 plt.show()
+# This will show the yearly profit distribution
+
+yearwiseprofit=df.groupby(["State","Year"])["Profit"].sum().unstack()
+sp=yearwiseprofit.sum(axis=1).nlargest(5).index
+ssp=yearwiseprofit.loc[sp]
+ssp.plot(kind="bar",colormap="viridis",edgecolor="black")
+plt.title("Top 5 States with Highest Profit Over the Years",fontsize=14)
+plt.xlabel("States",fontsize=12)
+plt.ylabel("Profit",fontsize=12)
+plt.xticks(rotation=45)
+plt.legend(title="Year")
+plt.grid(axis="y",linestyle="--",alpha=0.7)
+plt.show()
+# This will show the profit done in top 5 states with most profit over 4 years
