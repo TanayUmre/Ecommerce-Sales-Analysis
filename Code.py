@@ -158,3 +158,13 @@ plt.title("Year-wise Order Distribution")
 plt.ylabel("")
 plt.show()
 # This will show the year-wise distribution of orders placed
+
+stateprofit=df.groupby("State")["Profit"].sum().sort_values(ascending=False)
+hs=stateprofit.nlargest(5)
+plt.figure(figsize=(10,5))
+plt.bar(hs.index,hs.values,color="yellow")
+plt.title("Top 5 States with Highest Profit")
+plt.xlabel("States")
+plt.ylabel("Profit")
+plt.xticks(rotation=45)
+plt.show()
