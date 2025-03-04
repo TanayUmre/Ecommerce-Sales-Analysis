@@ -17,8 +17,8 @@ totalprofit=df["Profit"].sum()
 totalorder=df["Order ID"].nunique()
 totalcustomer=df["Customer ID"].nunique()
 
-print(f"Total Sales are : {totalsale:.4f}")
-print(f"Total Profit is : {totalprofit:.4f}")
+print(f"Total Sales are : {totalsale:.4f} Dollars")
+print(f"Total Profit is : {totalprofit:.4f} Dollars")
 print(f"Totals Orders Placed are : {totalorder}")
 print(f"Total Customers Using Ecommerce platform are : {totalcustomer}")
 
